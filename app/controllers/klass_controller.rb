@@ -25,6 +25,7 @@ class KlassController < Sinatra::Base
 
     post '/classes' do 
         klass = Klass.create(name: params[:name])
+        # binding.pry
         redirect "/classes/#{klass.id}"
     end 
 
@@ -49,6 +50,7 @@ class KlassController < Sinatra::Base
 
     delete '/classes/:id' do 
         klass = Klass.find(params[:id])
+        klass.student_klasses.destroy_all
         klass.destroy
         redirect '/classes'
     end 

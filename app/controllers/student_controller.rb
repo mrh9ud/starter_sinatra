@@ -20,6 +20,7 @@ class StudentController < Sinatra::Base
 
     post '/students' do 
         student = Student.create(name: params[:name])
+        # binding.pry
         redirect "/students/#{student.id}"
     end 
 
@@ -37,6 +38,7 @@ class StudentController < Sinatra::Base
 
     delete '/students/:id' do 
         student = Student.find(params[:id])
+        student.student_klasses.destroy_all
         student.destroy
         redirect '/students'
     end 
